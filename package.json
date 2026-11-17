@@ -1,0 +1,12 @@
+{
+  "name": "ops-tour-static-demo",
+  "private": true,
+  "version": "1.0.1",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "4.163.0"
+  }
+}

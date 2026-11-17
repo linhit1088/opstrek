@@ -1,0 +1,25 @@
+OPS DEMO · CLOUDFLARE WORKERS · SỬA LỖI VÒNG LẶP
+
+Gói này dùng cho dự án Worker opstrek đang triển khai qua Git với lệnh npx wrangler deploy.
+
+CẤU TRÚC REPOSITORY
+wrangler.jsonc
+package.json
+package-lock.json
+public/index.html
+public/demo-loader.js
+public/demo-runtime.js
+public/assets/...
+
+CÁCH CẬP NHẬT
+1. Giải nén ZIP rồi đưa các file/thư mục bên trong vào thư mục gốc repository mà Cloudflare đang lấy code.
+2. Kiểm tra public/index.html tồn tại. File public/_redirects cũ cần được bỏ vì quy tắc /* /index.html 200 gây vòng lặp dưới Workers.
+3. Nếu repository có wrangler.toml cũ, dùng duy nhất wrangler.jsonc kèm gói để Cloudflare đọc đúng cấu hình.
+4. Trong Worker opstrek, vào Settings > Build. Root directory là thư mục chứa wrangler.jsonc. Build command để trống. Deploy command là npx wrangler deploy.
+5. Commit cập nhật vào nhánh đang kết nối Cloudflare, hoặc bấm Retry build sau khi cập nhật repository. Cloudflare triển khai từ Git, nên cần cập nhật nội dung đã giải nén trong repository.
+6. Mở URL *.workers.dev của Worker, đăng nhập bằng demo / demo. Thử tải lại trang /dashboard hoặc /tours/sample-tour-MAY.
+
+Cấu hình assets.directory trỏ riêng vào public. assets.not_found_handling là single-page-application để các URL tour, khách và dashboard mở trực tiếp được.
+Tài liệu chính thức https://developers.cloudflare.com/workers/static-assets/routing/single-page-application/
+
+Dữ liệu mẫu và thay đổi lưu riêng trong trình duyệt. Có nút Đặt lại dữ liệu mẫu để bắt đầu lại. Các nghiệp vụ là mô phỏng phục vụ thử phần mềm.
